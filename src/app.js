@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3333;
+
 app.use(express.json());
 
 let db = [
@@ -46,6 +46,4 @@ app.put("/clientes/:id", (req, res) => {
   res.send(db);
 });
 
-app.listen(port, () => {
-  console.log(`Api iniciada em http://localhost:${port}`);
-});
+module.exports = app;
