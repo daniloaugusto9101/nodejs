@@ -1,6 +1,7 @@
 const app = require("./app");
-const port = 3333;
+require("dotenv").config();
+const PORT = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Api iniciada em http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Api iniciada em http://localhost:${PORT}`);
 });

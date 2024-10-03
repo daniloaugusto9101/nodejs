@@ -1,49 +1,9 @@
 const express = require("express");
+const router = require("./routes/routerApiV1");
 const app = express();
 
 app.use(express.json());
-
-let db = [
-  { id: 1, Nome: "Cliente 1", Idade: "20" },
-  { id: 2, Nome: "Cliente 2", Idade: "20" },
-  { id: 3, Nome: "Cliente 3", Idade: "200" },
-];
-
-app.get("/", (req, res) => {
-  res.status(200).send("Home | Bem vindo a API");
-});
-
-app.get("/clientes", (req, res) => {
-  res.status(200).json(db);
-});
-
-app.post("/clientes", (req, res) => {
-  const body = req.body;
-  if (!body) res.status(400).end();
-  db.push(body);
-  return res.json(body);
-});
-
-app.delete("/clientes/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  let newDB = db.filter((item) => {
-    return item.id !== id;
-  });
-  db = newDB;
-  res.send(newDB);
-});
-
-app.put("/clientes/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const body = req.body;
-  let newDB = db.map((item) => {
-    if (item.id == id) {
-      item = body;
-    }
-    return item;
-  });
-  db = newDB;
-  res.send(db);
-});
+app.use(express.json());
+app.use(router);
 
 module.exports = app;
